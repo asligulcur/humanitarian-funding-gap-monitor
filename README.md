@@ -25,6 +25,10 @@ None of these is the world's worst crisis by severity — Sudan is — but each 
 
 **The deeper insight:** today's most-overlooked plans followed multi-year trajectory signals visible in the data. The same signals are visible **now** for five named rising-risk countries (Angola, Mauritania, Mexico, South Sudan, Libya). Angola is four months from the structural-neglect threshold.
 
+![Briefing dashboard — funding-gap KPIs and the tier-colored global map](dashboard-screenshots/briefing-page.png)
+
+*The **Briefing** page: portfolio KPIs (combined shortfall, plans at risk, fastest-deteriorating country), a tier-colored global funding-gap map with marker size proportional to unmet need, and the natural-language **Ask Genie** surface — all responsive to the Year and Tier filters.*
+
 ---
 
 ## What this repo contains
@@ -45,6 +49,7 @@ humanitarian-funding-gap-monitor/
 │   └── deep-dive-p2.png
 │
 └── genie-outputs/                         ← Databricks Genie-surfaced discovery findings
+    ├── angola-trajectory.png               ← severity trajectory chart (shown below)
     ├── angola-sustained-drought.pdf
     ├── key-outlier-entities.pdf
     └── most-important-analytical-patterns.pdf
@@ -61,6 +66,10 @@ The submission slide deck and demo video are provided separately via the hackath
 | **Pipeline** | Databricks notebook (this repo) | Six stages: Financial Tracking Service-as-backbone unified crisis table → INFORM Severity Index → gap score + tier classification → bonus task temporal signals → geospatial output → durable Parquet outputs |
 | **Dashboard** | Databricks Artificial Intelligence / Business Intelligence (AI/BI) Dashboard | Three pages — **Briefing** (ranked table + map), **Deep Dive** (country KPIs + trajectory + compare), **Allocation** (leverage ranking + filter chain + override conditions) |
 | **Genie Space** | Databricks Genie + Unity Catalog | Natural-language-to-SQL discovery surface over the same verified Parquet outputs |
+
+![Deep Dive dashboard — Lebanon country drill-down](dashboard-screenshots/deep-dive-p1.png)
+
+*The **Deep Dive** page (Lebanon, 2025): the headline finding made concrete — the Syria 3RP plan **RSYR25** at **9% funded · gap_score 0.61 · Tier 1**, shown beside a well-resourced flash appeal (78% funded, Tier 4). Same country, opposite ends of the neglect spectrum.*
 
 ---
 
@@ -81,10 +90,25 @@ Every claim in the slide deck, this README, and the technical write-up traces to
 
 ## Verification & quality
 
-- **53 of 53 verification tests passing** (see the `verification_test` cell at the end of the notebook)
+- **53 of 53 verification tests passing** (see the final verification cell — a `check()` harness that asserts every documented figure against the pipeline output)
 - **Sensitivity analysis:** Tier 1 set holds 3–4 of 4 plans under ±0.05 noise; within-tier ordinal rank order churns. *We defend the set, not the order.*
 - **Top-10 preservation under noise** (avg of 10 trials): severity-only 8.4 / need-only 7.8 / coverage-only 7.8 / all-three 6.6 (out of 10)
 - **Cross-validation via the bonus task:** 36 of 37 chronic-neglect countries (independently identified through the temporal layer) already appear in the gap ranking. Only the Democratic People's Republic of Korea (DPRK) is invisible — no formal humanitarian plan tracked in the Financial Tracking Service (FTS).
+
+---
+
+## What Genie surfaced
+
+The Databricks Genie space was used to interrogate the verified Parquet outputs in natural language. Three discovery findings are included as PDFs in `genie-outputs/`.
+
+![Angola INFORM severity trajectory — ten consecutive months of worsening, crossing the high-severity threshold](genie-outputs/angola-trajectory.png)
+
+*Genie-surfaced trajectory for **Angola** — the top rising-risk country. INFORM severity held near 3.0 through 2024, then climbed for ten consecutive months (the longest sustained worsening trend globally) and crossed the high-severity threshold in early 2026. This is the signal behind the headline's early-warning claim. (Full finding: `genie-outputs/angola-sustained-drought.pdf`.)*
+
+Two further findings, both traced to the same Parquet outputs:
+
+- **The severity–funding paradox** (`most-important-analytical-patterns.pdf`) — Tier 1 (most overlooked) plans carry the highest gap scores (0.593 avg) yet receive the least funding (20.8% avg). Allocation is not primarily need-driven.
+- **The chronic-crisis penalty** (`key-outlier-entities.pdf`) — plans flagged for structural neglect (18+ months at High+ severity) are 50 of 87 plans and 91% of all funding gaps, yet receive only marginally more funding than better-resourced crises. The longer a crisis persists, the less additional funding it attracts relative to its severity.
 
 ---
 
