@@ -162,6 +162,6 @@ No proprietary data; no scraping; no API keys required.
 
 ## Author
 
-**Aslı Gülcür** · Powered by Databricks · May 2026
+**Asli Gulcur** · Powered by Databricks · May 2026
 
 Licensed under MIT (see `LICENSE`).
