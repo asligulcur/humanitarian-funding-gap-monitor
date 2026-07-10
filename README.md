@@ -92,7 +92,7 @@ Every claim in the slide deck, this README, and the technical write-up traces to
 
 - **53 of 53 verification tests passing** (see the final verification cell — a `check()` harness that asserts every documented figure against the pipeline output)
 - **Sensitivity analysis:** Tier 1 set holds 3–4 of 4 plans under ±0.05 noise; within-tier ordinal rank order churns. *We defend the set, not the order.*
-- **Top-10 preservation under noise** (avg of 10 trials): severity-only 8.4 / need-only 7.8 / coverage-only 7.8 / all-three 6.6 (out of 10)
+- **Top-10 preservation under noise** (avg of 5 trials): severity-only 8.4 / need-only 7.8 / coverage-only 7.8 / all-three 6.6 (out of 10)
 - **Cross-validation via the bonus task:** 36 of 37 chronic-neglect countries (independently identified through the temporal layer) already appear in the gap ranking. Only the Democratic People's Republic of Korea (DPRK) is invisible — no formal humanitarian plan tracked in the Financial Tracking Service (FTS).
 
 ---

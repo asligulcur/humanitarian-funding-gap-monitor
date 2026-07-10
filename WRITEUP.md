@@ -157,9 +157,9 @@ The `verification_test` cells in the notebook run 53 deterministic checks agains
 
 ### 4.2 Sensitivity analysis
 
-We perturbed each gap_score component with ±0.05 noise and measured top-10 plan preservation over 10 trials:
+We perturbed each gap_score component with ±0.05 noise and measured top-10 plan preservation over 5 trials:
 
-| Perturbation | Top-10 preserved (avg of 10) | Above 8.0 robust threshold? |
+| Perturbation | Top-10 preserved (avg of 5) | Above 8.0 robust threshold? |
 |---|---|---|
 | severity-only | 8.4 / 10 | ✅ yes |
 | need-only | 7.8 / 10 | ❌ no |
@@ -251,7 +251,7 @@ This is a brief writeup focused on design, architecture, and evaluation. The fol
 Every claim in this writeup, in the slide deck, and in the dashboard traces to a row in the Parquet outputs produced by the notebook in this repo. The 53/53 verification tests at the end of the notebook are the integrity guarantee. To re-run:
 
 1. Open the notebook in Databricks (or a Jupyter environment with the standard data-science stack: pandas, pyspark, openpyxl)
-2. Point the loaders at HDX-published source data (HNO, HRP, FTS, INFORM Severity Index, COD population — all public)
+2. Point the loaders at HDX-published source data (HNO, HRP, FTS, INFORM Severity Index, COD population — all public). **Note:** as shipped, the notebook reads these from a private Databricks Unity Catalog volume (`/Volumes/cmu_hackathon/...`) via `spark`/`dbutils`, so re-running outside that workspace requires re-pointing the loaders at local copies of the public files — the artifact is fully *auditable* as executed, but not re-runnable standalone without this step.
 3. Run all stages in order
 4. The verification cell at the end will report 53/53 if outputs match the documented findings
 
