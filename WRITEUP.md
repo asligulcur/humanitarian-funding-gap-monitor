@@ -2,7 +2,7 @@
 
 **A submission to the UN OCHA Geo-Insight Challenge — May 2026.**
 
-Author: Aslı Gülcür · Powered by Databricks
+Author: Asli Gulcur · Powered by Databricks
 
 ---
 
