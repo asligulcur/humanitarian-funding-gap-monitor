@@ -97,7 +97,7 @@ Every claim in the slide deck, this README, and the technical write-up traces to
 
 ## Verification & quality
 
-- **53 of 53 verification tests passing** (see the final verification cell — a `check()` harness that asserts every documented figure against the pipeline output)
+- **53 of 53 verification checks passing** (final notebook cell): a `check()` harness that pins the key outputs: table sizes, tier counts, the four Tier 1 plans, named country values (e.g., Sudan's 9.6 severity, Angola's 10 Increasing reports, the 1.98× rescale) and the saved output files.
 - **Sensitivity analysis:** Tier 1 set holds 3–4 of 4 plans under ±0.05 noise; within-tier ordinal rank order churns. *We defend the set, not the order.*
 - **Top-10 preservation under noise** (avg of 5 trials): severity-only 8.4 / need-only 7.8 / coverage-only 7.8 / all-three 6.6 (out of 10)
 - **Cross-validation via the bonus task:** 36 of 37 chronic-neglect countries (independently identified through the temporal layer) already appear in the gap ranking. Only the Democratic People's Republic of Korea (DPRK) is invisible — no formal humanitarian plan tracked in the Financial Tracking Service (FTS).
@@ -112,10 +112,14 @@ The Databricks Genie space was used to interrogate the verified Parquet outputs 
 
 *Angola's INFORM severity, surfaced by Genie. The January 2026 jump is not a crisis: INFORM switched from a 1–5 to a 1–10 scale that month, and the pipeline detects this automatically (the global median doubles overnight). Angola's real warning sign is INFORM's own trend flag: Increasing in 10 of the past year's monthly reports, more than any other country. (Full finding: `genie-outputs/angola-sustained-drought.pdf`.)*
 
-Two further findings, both traced to the same Parquet outputs:
+The three PDFs are kept as Genie produced them, unedited. Read them as raw model output; they contain these errors:
 
-- **The severity–funding paradox** (`most-important-analytical-patterns.pdf`) — Tier 1 (most overlooked) plans carry the highest gap scores (0.593 avg) yet receive the least funding (20.8% avg). Allocation is not primarily need-driven.
-- **The chronic-crisis penalty** (`key-outlier-entities.pdf`) — plans flagged for structural neglect (18+ months at High+ severity) are 50 of 87 plans and 91% of all funding gaps, yet receive only marginally more funding than better-resourced crises. The longer a crisis persists, the less additional funding it attracts relative to its severity.
+- **Angola** (`angola-sustained-drought.pdf`): "10 consecutive months" of worsening, February 2025 through April 2026. That window spans 15 months; the pipeline counts 10 Increasing reports, the figure used above.
+- **A mislabeled plan** (both other PDFs): RRHOAY is called a "Rohingya response". It is the Regional Migrant Response Plan for the Horn of Africa to Yemen and Southern Africa.
+- **A contradicted headline** (`most-important-analytical-patterns.pdf`): it reports an "inverse relationship" between severity and funding, then gives the correlation as weakly positive (0.17).
+- **A wrong share** (same file): "10 countries account for 66%" of the funding gap, but its own figures ($15.6B of $29.36B) give 53%.
+
+Genie is useful for exploring the data; its claims still need checking against the pipeline.
 
 ---
 
