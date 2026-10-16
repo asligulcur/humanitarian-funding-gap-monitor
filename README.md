@@ -125,7 +125,7 @@ Genie is useful for exploring the data; its claims still need checking against t
 
 ## Responsible AI stance
 
-**No Large Language Model (LLM) in the scoring path.** The gap_score is a deterministic SQL/Python pipeline. LLM-based components (Databricks Genie) operate only on the **query surface** — translating natural-language questions into SQL against the verified Parquet outputs. The deterministic core IS our responsible-AI stance.
+**No Large Language Model (LLM) in the scoring path.** The gap_score is a deterministic SQL/Python pipeline. LLM-based components (Databricks Genie) operate only on the **query surface** — translating natural-language questions into SQL against the verified Parquet outputs. Keeping the scoring deterministic is the project's main responsible-AI safeguard.
 
 See `WRITEUP.md` §6 for details.
 
