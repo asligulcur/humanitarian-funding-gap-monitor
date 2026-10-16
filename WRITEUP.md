@@ -14,7 +14,7 @@ Author: Asli Gulcur · Powered by Databricks
 
 None of these is the world's worst crisis by severity — Sudan is — but each is severely underfunded relative to documented need. *Worst crisis is not the same as most overlooked. That distinction is itself the central methodological finding.*
 
-**The anticipatory dimension:** today's most-overlooked plans followed documented multi-year trajectories. The same trajectory signals are visible now for five named rising-risk countries: Angola, Mauritania, Mexico, South Sudan, Libya. Angola is four months from the structural-neglect threshold. Acting on those signals before they crystallize in the single-snapshot gap_score IS anticipatory action in OCHA's formal sense.
+**The anticipatory dimension:** the four Tier 1 plans share chronic severity (High or Very High in every monthly reading over the past two years); five countries show early signs of heading the same way: Angola, Mexico, Libya, South Sudan (worsening severity trends) and Mauritania (rising need, no plan). Angola is four months from the structural-neglect threshold. Acting on those signals before they crystallize in the single-snapshot gap_score IS anticipatory action in OCHA's formal sense.
 
 ---
 
