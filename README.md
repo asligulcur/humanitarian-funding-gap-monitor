@@ -1,6 +1,8 @@
 # Geo-Insight: Humanitarian Funding Gap Monitor
 
-**A submission to the United Nations Office for the Coordination of Humanitarian Affairs (UN OCHA) Geo-Insight Challenge — May 2026.**
+A Databricks pipeline that ranks humanitarian plans by how far their funding falls short of documented need, with a dashboard and a natural-language (Genie) query layer on top.
+
+*Built solo for the Databricks × UN OCHA Geo-Insight Challenge (CMU hackathon, May 2026), with AI coding assistance. **Selected as one of three winners.***
 
 > *Which crises are most overlooked? And can we anticipate the next ones?*
 
@@ -8,7 +10,7 @@
 
 ## Headline finding
 
-The **Lebanon slice of the Syria Regional Refugee & Resilience Plan (Syria 3RP, plan code LBN-RSYR25)** is the world's most-overlooked humanitarian plan in 2025:
+The **Lebanon slice of the Syria Regional Refugee & Resilience Plan (Syria 3RP, plan code LBN-RSYR25)** ranks as the most overlooked humanitarian plan of 2025 in this analysis, with the highest gap score and the largest unfunded amount of any plan:
 
 - **$2.99B required · 9% funded · $2.72B unmet**
 
@@ -23,12 +25,12 @@ Four Tier 1 plans concentrate **$7.3B of overlooked need globally in 2025**:
 
 These are the most *overlooked* crises, not the most severe: Sudan has the highest severity in the data (9.6 of 10) but its plan is 40% funded, so it ranks just below, in Tier 2.
 
-**What to watch next:** the four Tier 1 plans have one thing in common: **INFORM** (the Index for Risk Management's Severity Index, a standard monthly crisis-severity rating) rated their crises High or Very High throughout the past two years. Five countries show early signs of the same pattern:
+**What to watch next:** the four Tier 1 plans have one thing in common: **INFORM** (the Index for Risk Management's Severity Index, a standard monthly crisis-severity rating) rated their crises High or Very High in all or all but one of the past two years' monthly reports. Five countries show early signs of the same pattern:
 
-- **Angola:** the longest worsening trend of any country (flagged Increasing in 10 of the past year's monthly reports). Four more months at High would make it chronically severe by this project's definition.
-- **Mexico:** the second-longest worsening trend (7 reports).
+- **Angola:** flagged worsening more often than any other country (Increasing in 10 monthly reports over the past year). Four more months at High would make it chronically severe by this project's definition.
+- **Mexico:** the second most often flagged worsening (7 reports), though still rated Medium.
 - **Libya** and **South Sudan:** already chronically severe, and still worsening.
-- **Mauritania:** rising need, but no humanitarian plan to fund.
+- **Mauritania:** severity rising, but no humanitarian plan to fund.
 
 These are watch signals, not forecasts; they have not been back-tested.
 
@@ -62,8 +64,6 @@ humanitarian-funding-gap-monitor/
     └── most-important-analytical-patterns.pdf
 ```
 
-The submission slide deck and demo video are provided separately via the hackathon's Google Drive folder.
-
 ---
 
 ## The system
@@ -89,18 +89,15 @@ The notebook produces the following Parquet outputs (durable in the Databricks w
 | `ranked_gap_scores` | per-plan | gap_score, tier classification, plan-type-aware reasoning |
 | `country_rollup` | per-country-year | severity, People in Need (PIN), funding %, aggregated gap_score |
 | `documented_need_no_plan` | per-country | countries with documented severity but no formal humanitarian plan (e.g., Mauritania) |
-| `inform_country_signals` | per-country-month | bonus task — trailing-window temporal signals (`structural_neglect_v2`, `inform_severity_trend`, `months_increasing_12mo`) |
-
-Every claim in the slide deck, this README, and the technical write-up traces to a row in one of these Parquet outputs.
+| `inform_country_signals` | per-country | bonus task — 12- and 24-month signals from the monthly INFORM series (`structural_neglect_v2`, `months_increasing_12mo`) |
 
 ---
 
 ## Verification & quality
 
 - **53 of 53 verification checks passing** (final notebook cell): a `check()` harness that pins the key outputs: table sizes, tier counts, the four Tier 1 plans, named country values (e.g., Sudan's 9.6 severity, Angola's 10 Increasing reports, the 1.98× rescale) and the saved output files.
-- **Sensitivity analysis:** Tier 1 set holds 3–4 of 4 plans under ±0.05 noise; within-tier ordinal rank order churns. *We defend the set, not the order.*
-- **Top-10 preservation under noise** (avg of 5 trials): severity-only 8.4 / need-only 7.8 / coverage-only 7.8 / all-three 6.6 (out of 10)
-- **Cross-validation via the bonus task:** 36 of 37 chronic-neglect countries (independently identified through the temporal layer) already appear in the gap ranking. Only the Democratic People's Republic of Korea (DPRK) is invisible — no formal humanitarian plan tracked in the Financial Tracking Service (FTS).
+- **Sensitivity:** with ±0.05 noise added to the inputs, at least 3 of the 4 Tier 1 plans stayed in Tier 1 in every trial (all 4 under severity-only noise). The wider top 10 is less stable (on average 7 to 8 of the 10 stay), so the project reports tiers, not exact ranks.
+- **Coverage check:** INFORM rated 37 countries High or Very High in at least 18 monthly reports over the past two years; 36 of them have a plan in the ranking. The exception is North Korea, which has no plan in the Financial Tracking Service (FTS).
 
 ---
 
@@ -133,7 +130,7 @@ See `WRITEUP.md` §6 for details.
 
 ## Architecture in one sentence
 
-The pipeline switches the join backbone from Humanitarian Response Plans (HRP) to the Financial Tracking Service (FTS) — expanding scope from 22 countries to 77 and making Regional Response Plans (like the Syria 3RP) visible for the first time — then computes a multiplicative `gap_score = severity_norm × need_norm × coverage_gap_norm` per plan, classifies into tiers, and validates against an independent temporal-signals pathway (the bonus task) that flags structural neglect across 4,927 monthly observations of 108 countries.
+The pipeline switches the join backbone from Humanitarian Response Plans (HRP) to the Financial Tracking Service (FTS), which expands scope from 22 countries to 77 and brings in regional plans like the Syria 3RP that an HRP-based join misses; it then computes a multiplicative `gap_score = severity_norm × need_norm × coverage_gap_norm` per plan, classifies plans into tiers, and checks coverage against a separate signal built from 4,927 monthly INFORM country ratings (108 countries).
 
 ---
 
@@ -147,7 +144,6 @@ All public, all via the Humanitarian Data Exchange (HDX):
 | **HNO** | Humanitarian Needs Overview | UN OCHA |
 | **HRP** | Humanitarian Response Plans | UN OCHA |
 | **INFORM Severity Index** | Index for Risk Management — Severity Index | ACAPS and the Joint Research Centre (JRC), European Union |
-| **COD** | Common Operational Datasets — population | UN OCHA / partners |
 
 No proprietary data; no scraping; no API keys required.
 
@@ -173,6 +169,6 @@ No proprietary data; no scraping; no API keys required.
 
 ## Author
 
-**Asli Gulcur** · Powered by Databricks · May 2026
+Author: [Asli Gulcur](https://asligulcur.github.io/).
 
 Licensed under MIT (see `LICENSE`).
