@@ -23,7 +23,14 @@ Four Tier 1 plans concentrate **$7.3B of overlooked need globally in 2025**:
 
 None of these is the world's worst crisis by severity — Sudan is — but each is severely underfunded relative to documented need.
 
-**The deeper insight:** today's most-overlooked plans followed multi-year trajectory signals visible in the data. The same signals are visible **now** for five named rising-risk countries (Angola, Mauritania, Mexico, South Sudan, Libya). Angola is four months from the structural-neglect threshold.
+**What to watch next:** the four Tier 1 plans have one thing in common: INFORM rated their crises High or Very High throughout the past two years. Five countries show early signs of the same pattern:
+
+- **Angola:** the longest worsening trend of any country (flagged Increasing in 10 of the past year's monthly reports). Four more months at High would make it chronically severe by this project's definition.
+- **Mexico:** the second-longest worsening trend (7 reports).
+- **Libya** and **South Sudan:** already chronically severe, and still worsening.
+- **Mauritania:** rising need, but no humanitarian plan to fund.
+
+These are watch signals, not forecasts; they have not been back-tested.
 
 ![Briefing dashboard — funding-gap KPIs and the tier-colored global map](dashboard-screenshots/briefing-page.png)
 
@@ -101,9 +108,9 @@ Every claim in the slide deck, this README, and the technical write-up traces to
 
 The Databricks Genie space was used to interrogate the verified Parquet outputs in natural language. Three discovery findings are included as PDFs in `genie-outputs/`.
 
-![Angola INFORM severity trajectory — ten consecutive months of worsening, crossing the high-severity threshold](genie-outputs/angola-trajectory.png)
+![Angola INFORM severity, 2024–2026; the January 2026 jump reflects INFORM's change of scale](genie-outputs/angola-trajectory.png)
 
-*Genie-surfaced trajectory for **Angola** — the top rising-risk country. INFORM severity held near 3.0 through 2024, then climbed for ten consecutive months (the longest sustained worsening trend globally) and crossed the high-severity threshold in early 2026. This is the signal behind the headline's early-warning claim. (Full finding: `genie-outputs/angola-sustained-drought.pdf`.)*
+*Angola's INFORM severity, surfaced by Genie. The January 2026 jump is not a crisis: INFORM switched from a 1–5 to a 1–10 scale that month, and the pipeline detects this automatically (the global median doubles overnight). Angola's real warning sign is INFORM's own trend flag: Increasing in 10 of the past year's monthly reports, more than any other country. (Full finding: `genie-outputs/angola-sustained-drought.pdf`.)*
 
 Two further findings, both traced to the same Parquet outputs:
 
