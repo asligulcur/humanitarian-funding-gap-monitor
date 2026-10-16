@@ -21,7 +21,7 @@ Four Tier 1 plans concentrate **$7.3B of overlooked need globally in 2025**:
 | YEM-HYEM25 | Yemen | Humanitarian Response Plan (HRP) |
 | MMR-HMMR25b | Myanmar | Humanitarian Response Plan (HRP) |
 
-None of these is the world's worst crisis by severity — Sudan is — but each is severely underfunded relative to documented need.
+These are the most *overlooked* crises, not the most severe: Sudan has the highest severity in the data (9.6 of 10) but its plan is 40% funded, so it ranks just below, in Tier 2.
 
 **What to watch next:** the four Tier 1 plans have one thing in common: **INFORM** (the Index for Risk Management's Severity Index, a standard monthly crisis-severity rating) rated their crises High or Very High throughout the past two years. Five countries show early signs of the same pattern:
 
