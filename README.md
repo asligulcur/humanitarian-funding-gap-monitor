@@ -23,7 +23,7 @@ Four Tier 1 plans concentrate **$7.3B of overlooked need globally in 2025**:
 
 None of these is the world's worst crisis by severity — Sudan is — but each is severely underfunded relative to documented need.
 
-**What to watch next:** the four Tier 1 plans have one thing in common: INFORM rated their crises High or Very High throughout the past two years. Five countries show early signs of the same pattern:
+**What to watch next:** the four Tier 1 plans have one thing in common: **INFORM** (the Index for Risk Management's Severity Index, a standard monthly crisis-severity rating) rated their crises High or Very High throughout the past two years. Five countries show early signs of the same pattern:
 
 - **Angola:** the longest worsening trend of any country (flagged Increasing in 10 of the past year's monthly reports). Four more months at High would make it chronically severe by this project's definition.
 - **Mexico:** the second-longest worsening trend (7 reports).
@@ -142,7 +142,7 @@ All public, all via the Humanitarian Data Exchange (HDX):
 | **FTS** | Financial Tracking Service | UN OCHA |
 | **HNO** | Humanitarian Needs Overview | UN OCHA |
 | **HRP** | Humanitarian Response Plans | UN OCHA |
-| **INFORM Severity Index** | Index for Risk Management — Severity Index | Joint Research Centre (JRC), European Union |
+| **INFORM Severity Index** | Index for Risk Management — Severity Index | ACAPS and the Joint Research Centre (JRC), European Union |
 | **COD** | Common Operational Datasets — population | UN OCHA / partners |
 
 No proprietary data; no scraping; no API keys required.
